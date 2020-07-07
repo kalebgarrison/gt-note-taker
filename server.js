@@ -37,7 +37,7 @@ app.post("/api/notes", (req, res) => {
       return res.send("An error occurred reading your data.");
     }
     const arrayOfNotes = JSON.parse(data);
-    const newNote = {...req.body, id: arrayOfNotes.length};
+    const newNote = {...req.body, id: arrayOfNotes.length + 1};
     arrayOfNotes.push(newNote);
     fs.writeFile("db/db.json", JSON.stringify(arrayOfNotes), "utf8", (err) => {
         if (err){
@@ -64,6 +64,7 @@ app.delete("/api/notes/:id", (req, res) => {
       });
     });
   });
+
 
 
 app.get("*", (_, res) => {
